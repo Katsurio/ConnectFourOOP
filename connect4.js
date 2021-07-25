@@ -89,7 +89,7 @@ function handleClick(evt) {
   const x = +evt.target.id
 
   // get next spot in column (if none, ignore click)
-  const y = findSpotForCol(x)
+  const y = findSpotForCol.call(Game, x)
   if (y === null) {
     return
   }
