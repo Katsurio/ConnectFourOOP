@@ -13,7 +13,7 @@ class Game {
     this.makeboard()
     this.makeHtmlBoard()
     this.handleStartBtnClick()
-    this.gameIsRunning = false
+    this.gameIsRunning = true
   }
 
   /**
@@ -89,6 +89,7 @@ class Game {
 
   /** handleClick: handle click of column top to play piece */
   handleClick(evt) {
+    if (!this.gameIsRunning) return
     // get x from ID of clicked cell
     const x = +evt.target.id
 
