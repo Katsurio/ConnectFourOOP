@@ -32,3 +32,20 @@
 #column-top td:hover {
   background-color: gold;
 }
+
+#game {
+  position: relative;
+}
+
+#form {
+  position: relative;
+}
+
+input[type='text'] {
+  width: 142px;
+}
+
+input[type='button'] {
+  background-color: white;
+  border-width: 1.5px;
+}
