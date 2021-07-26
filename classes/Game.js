@@ -71,7 +71,6 @@ class Game {
   placeInTable(y, x) {
     const piece = document.createElement('div')
     piece.classList.add('piece')
-    // piece.classList.add(`p${this.currPlayer}`)
     piece.style.top = -50 * (y + 2)
     piece.style.backgroundColor = this.currPlayer.color
 
@@ -106,7 +105,7 @@ class Game {
 
     // check for win
     if (this.checkForWin()) {
-      return this.endGame(`Player ${this.currPlayer} won!`)
+      return this.endGame(`The ${this.currPlayer.color} player won!`)
     }
 
     // check for tie
@@ -115,7 +114,6 @@ class Game {
     }
 
     // switch players
-    // this.currPlayer = this.currPlayer === 1 ? 2 : 1
     this.currPlayer =
       this.currPlayer === this.players[0] ? this.players[1] : this.players[0]
   }
