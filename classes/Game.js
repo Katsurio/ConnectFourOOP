@@ -12,6 +12,7 @@ class Game {
     this.board = [] // array of rows, each row is array of cells  (board[y][x])
     this.makeboard()
     this.makeHtmlBoard()
+    this.handleStartBtnClick()
   }
 
   /**
@@ -102,12 +103,16 @@ class Game {
     }
 
     // check for tie
-    if (this.board.every((row) => row.every((cell) => cell))) {
+    if (this.checkForTie()) {
       return this.endGame('Tie!')
     }
 
     // switch players
     this.currPlayer = this.currPlayer === 1 ? 2 : 1
+  }
+
+  checkForTie() {
+    return this.board.every((row) => row.every((cell) => cell))
   }
 
   /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -162,6 +167,16 @@ class Game {
         }
       }
     }
+  }
+
+  handleStartBtnClick() {
+    const startBtn = document.getElementById('start-btn')
+    startBtn.addEventListener('click', this.startNewGame)
+  }
+  /** startGame: start game */
+  startNewGame() {
+    document.querySelector('#board').innerHTML = ''
+    new Game(6, 7)
   }
 }
 
