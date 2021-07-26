@@ -5,14 +5,14 @@ class Game {
    * column until a player gets four-in-a-row (horiz, vert, or diag) or until
    * board fills (tie)
    */
-  constructor(height, width) {
-    this.HEIGHT = height
-    this.WIDTH = width
-    this.currPlayer = 1 // active player: 1 or 2
+  constructor(p1, p2) {
+    this.HEIGHT = 6
+    this.WIDTH = 7
+    this.currPlayer = p1 // active player: p1 or p2
+    this.players = [p1, p2]
     this.board = [] // array of rows, each row is array of cells  (board[y][x])
     this.makeboard()
     this.makeHtmlBoard()
-    this.handleStartBtnClick()
     this.gameIsRunning = true
   }
 
@@ -71,8 +71,9 @@ class Game {
   placeInTable(y, x) {
     const piece = document.createElement('div')
     piece.classList.add('piece')
-    piece.classList.add(`p${this.currPlayer}`)
+    // piece.classList.add(`p${this.currPlayer}`)
     piece.style.top = -50 * (y + 2)
+    piece.style.backgroundColor = this.currPlayer.color
 
     const spot = document.getElementById(`${y}-${x}`)
     spot.append(piece)
@@ -114,7 +115,9 @@ class Game {
     }
 
     // switch players
-    this.currPlayer = this.currPlayer === 1 ? 2 : 1
+    // this.currPlayer = this.currPlayer === 1 ? 2 : 1
+    this.currPlayer =
+      this.currPlayer === this.players[0] ? this.players[1] : this.players[0]
   }
 
   checkForTie() {
@@ -174,16 +177,11 @@ class Game {
       }
     }
   }
-
-  handleStartBtnClick() {
-    const startBtn = document.getElementById('start-btn')
-    startBtn.addEventListener('click', this.startNewGame)
-  }
-  /** startGame: start game */
-  startNewGame() {
-    document.querySelector('#board').innerHTML = ''
-    new Game(6, 7)
-  }
 }
 
-new Game(6, 7)
+document.querySelector('#start-btn').addEventListener('click', () => {
+  document.querySelector('#board').innerHTML = ''
+  let p1 = new Player(document.querySelector('#p1-color').value)
+  let p2 = new Player(document.querySelector('#p2-color').value)
+  new Game(p1, p2)
+})
