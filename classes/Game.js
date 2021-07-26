@@ -13,6 +13,7 @@ class Game {
     this.makeboard()
     this.makeHtmlBoard()
     this.handleStartBtnClick()
+    this.gameIsRunning = false
   }
 
   /**
@@ -79,7 +80,11 @@ class Game {
 
   /** endGame: announce game end */
   endGame(msg) {
-    alert(msg)
+    this.gameIsRunning = false
+
+    setTimeout(() => {
+      alert(msg)
+    }, 100)
   }
 
   /** handleClick: handle click of column top to play piece */
